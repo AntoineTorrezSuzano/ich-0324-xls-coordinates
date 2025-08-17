@@ -32,7 +32,7 @@ L’objectif de cet exercice est de vous faire pratiquer l’ensemble du cycle D
    - Développement à l'aide de PowerShell 7
 
 3. **Créer la commandlet PowerShell**
-   - Nommer la commandlet *Convert-XlsCoordinate*.
+   - Nommer la commandlet *ConvertFrom-XlsCoordinates*.
    - La coordonnée à convertir (par exemple : D3) est fournie au travers du paramètres *-Cell*.
    - La commandlet retourne une *HashTable* contenant une clé *Column* et *Row*.
    - Découper les opérations dans des sous-fonctions pour faciliter les tests unitaires.
@@ -110,5 +110,5 @@ L’objectif de cet exercice est de vous faire pratiquer l’ensemble du cycle D
 
 ```powershell
 # Convertir une cellule Excel en indices numériques
-Convert-XlsCoordinates -Cell 'D3'
+ConvertFrom-XlsCoordinates -Cell 'D3'
 # Résultat attendu : @{ 'Column' = 4; 'Row' = 3 }
