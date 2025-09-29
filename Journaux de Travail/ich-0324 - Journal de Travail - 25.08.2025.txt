@@ -1,0 +1,62 @@
+Objectif : 
+Crée une commandlet PowerShell 7 et la publier
+Contrainte : 
+utilisation d'un dev container (Docker)
+doit être utilisable dans un environement linux et windows
+nom de la commandlet "ConvertFrom-XlsCooridnates"
+nom du module powershell "XlsCoordinatesConverter-ant"
+Aucun warning ou erreur de la part de PSScriptAnalyzer
+Utilisation de VSCode Prettier
+récit utilisateur : 
+L'utilisateur souhaite ?
+
+Objectif de la journée : 
+Mettre en place le devcontainer | done
+Mettre en place des test unitaire (savoir) (installer le module au lancement du devcontainer) (done)
+Mettre en place le code coverage dans le devcontainer.json (attendre car psscriptanalyzer n'a pas bien été adapté à nos contraintes) (done car c'est déjà installé)
+Mettre en place le formateur de code (prettier) dans le devcontainer.json (done)
+
+
+
+Que faire :
+Comprendre l'utilisation d'un dev container -> ce site explique bien comment fonctionne les devcontainer à l'interieur de vscode : https://code.visualstudio.com/docs/devcontainers/containers
+Test unitaire
+Code Coverage
+Savoir c'est quoi une commande let
+savoir crée une commande let
+utiliser une commandlet téléchargé depuis la galerie PowerShell afin de comprendre un peu l'environnement et le fonctionnement
+publier une commandlet PowerShell qui print "hello ceff industrie, cp-22ant" dans la gallery
+
+
+c'est quoi un dev container ? 
+je crois que il faut installer powershell 7 dans un docker container et mettre a l'intérieur la commandlet installé dans le system ?
+il faut aussi publier le module dans le magasin ?
+
+
+
+ 
+
+Journal de travail :
+- Installation du module Pester pour les test unitaire
+- Installation du module Plaster pour la création de "Projet" PowerShell (module)
+- Modification de l'image de "mcr.microsoft.com/powershell:lts-debian-11" vers "mcr.microsoft.com/powershell:7.5-debian-bookworm"
+- Mise en place de "postCreateCommand" qui install Pester
+- Mise en place de l'extension prettier et le changement des settings pour mettre prettier comme formateur
+- 
+
+
+Pour la prochaine fois :
+- Regarde l'image utilisé dans le devcontainer.json, comme ça tu reprend un peu conscience
+- Il y a deux commande à se rappeler, Invoke-Pester c'est pour les test unitaire, il va automatiquement détecter les fichier nommé en .Tests.ps1 et les executer
+- La deuxieme commande c'est Invoke-ScriptAnalyzer
+- POC c'est Proof Of Concept, c'est prouver ou dire que le projet est réalisable
+- Tu dois coder en PowerShell pour convertir du coup la colonne genre D3 à un nombre dans un tableau donc (4, 3) puisque D c'est 4 car A => 65 - 1 (ascii
+- excel va jusqu'à trois lettre, donc "ZZZ" et jusqu'à 1048576
+- Etre precis avec les type d'exceptions
+
+
+
+encore pour laprochaine fois
+j'arrive pas a retourner des psobject et les tester
+
+
