@@ -1,11 +1,9 @@
 function Parse-Table ([string]$Cell) {
-    $result="["
-    $letterSide = 0
-    $numberSide = ""
-    $numOfLetter=0
-    $passedLetter=$false
-    $CellUpper=$Cell.ToUpper();
-    $letters = @();
+    $CellUpper=$Cell.ToUpper(); # Format the parameters to upper characters
+    $passedLetter=$false # 
+
+    $letters = @(); #Array
+    $numbers = 0 #Int
 
     foreach ($char in [char[]]$CellUpper) {
         # Separate between letters and numbers (Row & Col)
@@ -17,8 +15,6 @@ function Parse-Table ([string]$Cell) {
                 # That is because there was letters after numbers, which is an invalide format
                 Throw New-Object System.ArgumentException "Parameter $Cell is an invalid format"
             }
-            # We count the number of Letters
-            $numOfLetter++
 
             Write-Host "Add $char in letters array";
             $letters += $char;
@@ -27,15 +23,8 @@ function Parse-Table ([string]$Cell) {
     }
 
     Write-Host "Letters array : $letters";
+    Write-Host `Letters length : $letters.Length`
 
-
-    
-    # if($numOfLetter -eq -1){
-    #     Throw New-Object System.ArgumentException "Parameter $Cell is an invalid format"
-    #     # return "Error: Invalid Format"
-    # }
-
-    # $result+=","
     # $numOfNumber=-1
     # foreach ($char in [char[]]$CellUpper) {
     #     if($char -match "^\d+$"){

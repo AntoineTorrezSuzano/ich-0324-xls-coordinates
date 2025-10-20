@@ -19,7 +19,7 @@ Describe "Parse-Table" {
     }
     Context "Convert AA234" {
         It "Returns [27,234]" {
-            $result = Parse-Table -Cell a1 
+            $result = Parse-Table -Cell a1s
             $result.Column | Should -Be 27
             $result.Row | Should -Be 234
         }
