@@ -1,11 +1,16 @@
 ### Own Script
+
 ```cmd
-. .\XlsCoordinatesConverter.ps1 
+. .\XlsCoordinatesConverter.psm1
 ```
+
+```cmd
+Import-Module .\XlsCoordinatesConverter.psm1
+```
+
 ```cmd
 Parse-Table aaa
 ```
-
 
 ### PSScriptAnalyzer Module
 
@@ -17,10 +22,20 @@ Parse-Table aaa
     Invoke-Formatter
 ```
 
+### Pester Module
 
+```pwsh
+    Invoke-Pester
+```
 
+### Invoke Build Module
 
-Default Modules Install 
+```pwsh
+    Invoke-Build
+```
+
+### Default Modules Install
+
 ```pwsh
 Install-Module -Name PSScriptAnalyzer -RequiredVersion 1.24.0 -Force
 ```
