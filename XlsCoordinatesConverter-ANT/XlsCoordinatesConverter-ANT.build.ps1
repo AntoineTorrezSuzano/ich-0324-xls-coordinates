@@ -29,14 +29,27 @@ task analyse-script {
 	}
 }
 
-task Tests {
+
+
+task Tests-N-Coverage {
 	#tester code coverage 100%
-	$pesterResult = Invoke-Pester -PassThru
+	$config = New-PesterConfiguration
+
+	$config.Run.Path = "."
+
+	$config.CodeCoverage.Enabled = $true
+
+
+
+
+	$pesterResult = Invoke-Pester -Configuration $config -PassThru $true
 
 	if($pesterResult.FailedCount -gt 0) {
 		throw "Pester tests failed."
 	}
 }
+
+
 
 # mise a jour manifest
 task update-manifest {
@@ -52,14 +65,16 @@ task update-manifest {
 }
 
 task Release {
-	Invoke-Build analyse-script
-	Invoke-Build Tests
-	Invoke-Build update-manifest
+	#Under construction, need to complete the code coverage at task Tests-N-Coverage
 
-	$env = @{}
-	get-content "../.env" | ForEach-Object {
-		$name, $value = $_.split('=')
-		$env.Add($name, $value)
-	}
-	Publish-Module -Path '..\XlsCoordinatesConverter-ANT' -NuGetApiKey $env["NuGetApiKey"]
+	# Invoke-Build analyse-script
+	# Invoke-Build Tests
+	# Invoke-Build update-manifest
+
+	# $env = @{}
+	# get-content "../.env" | ForEach-Object {
+	# 	$name, $value = $_.split('=')
+	# 	$env.Add($name, $value)
+	# }
+	# Publish-Module -Path '..\XlsCoordinatesConverter-ANT' -NuGetApiKey $env["NuGetApiKey"]
 }
