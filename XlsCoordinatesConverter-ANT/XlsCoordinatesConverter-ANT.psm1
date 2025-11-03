@@ -1,6 +1,15 @@
-function ConvertFrom-XlsCoordinates ([string]$Cell) {
+function ConvertFrom-XlsCoordinate ([string]$Cell) {
+    <#
+    .DESCRIPTION
+        This cmdlet accept a String value for the parameter "-Cell" and it will return a the format value of the given cell as value usable in excel. You would want to view the example.
+
+    .EXAMPLE
+        PS C:\> ConvertFrom-XlsCoordinate -Cell "B4"
+    #>
+
+
     $CellUpper=$Cell.ToUpper(); # Format the parameters to upper characters
-    $passedLetter=$false # 
+    $passedLetter=$false
 
     $columnLetters = "" #String
     $rowNumbers = "" #String
@@ -35,9 +44,7 @@ function ConvertFrom-XlsCoordinates ([string]$Cell) {
 
     foreach($letter in [char[]]$columnLetters){
         $columnIndex = $columnIndex * 26
-    
         $letterValue = [int]$letter - [int]([char]'A') + 1
-
         $columnIndex += $letterValue
     }
 
@@ -46,7 +53,7 @@ function ConvertFrom-XlsCoordinates ([string]$Cell) {
         Row = $row
     }
 
-    Export-ModuleMember -Function ConvertFrom-XlsCoordinates
+    Export-ModuleMember -Function ConvertFrom-XlsCoordinate
 
 
 }
