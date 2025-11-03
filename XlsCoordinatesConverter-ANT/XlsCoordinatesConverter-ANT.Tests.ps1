@@ -8,7 +8,7 @@ Describe "ConvertFrom-XlsCoordinates Module" {
        It "Returns [1,1]" {
            $result = ConvertFrom-XlsCoordinates -Cell a1 
            $result.Column | Should -Be 1
-           $result.Row | Should -Be 1
+           $result.Row | Should -Be 5
        }
    }
     Context "Convert A1" {

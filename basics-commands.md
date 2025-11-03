@@ -43,7 +43,7 @@ Install-Module -Name PSScriptAnalyzer -RequiredVersion 1.24.0 -Force
 ### Create a psd1 file (Manifest file)
 
 ```pwsh
-New-ModuleManifest -Path .\XlsCoordinatesConverter.psd1 -RootModule 'XlsCoordinatesConverter.psm1' -Author "Opaline" -Description "This is an exemple of manifest description section" -FunctionsToExport 'ConvertFrom-XlsCoordinates'
+New-ModuleManifest -Path .\XlsCoordinatesConverter.psd1 -RootModule 'XlsCoordinatesConverter.psm1' -Author "CP-22ANT" -Description "This is an exemple of manifest description section" -FunctionsToExport 'ConvertFrom-XlsCoordinates'
 ```
 
 ### Publish a module file
@@ -61,6 +61,10 @@ not secure enough, gotta see how is it at school
 
 ```pwsh
     Update-PSResource -Name XlsCoordinatesConverter
+```
+
+```pwsh
+    Update-Module
 ```
 
 ### Get a look at Powershell version
