@@ -20,18 +20,16 @@ jobs:
       - name: Install Necessary Modules
         shell: pwsh
         run: |
-        Install-Module -Name Pester -RequiredVersion 5.3.1 -Force
-        Install-Module -Name InvokeBuild -RequiredVersion 5.9.11 -Force
+          Install-Module -Name Pester -RequiredVersion 5.3.1 -Force
+          Install-Module -Name InvokeBuild -RequiredVersion 5.9.11 -Force
 
       - name: Tests
         shell: pwsh
         run: |
-        Set-Location ./XlsCoordinatesConverter-ANT
-        Invoke-Build Pre-Publish-Tests
+          Set-Location ./XlsCoordinatesConverter-ANT
+          Invoke-Build Pre-Publish-Tests
 
       - name: Publish
         shell: pwsh
         run: |
-        ls
-
-
+          ls
