@@ -37,16 +37,26 @@ task Tests-N-Coverage {
 
 	$config.Run.Path = "."
 
+	$config.Run.PassThru = $true
+
 	$config.CodeCoverage.Enabled = $true
 
 
-
-
-	$pesterResult = Invoke-Pester -Configuration $config -PassThru $true
+	$pesterResult = Invoke-Pester -Configuration $config
 
 	if($pesterResult.FailedCount -gt 0) {
 		throw "Pester tests failed."
 	}
+
+	$coverageData = $pesterResult.CodeCoverage
+
+    $coveragePercent = [math]::Round($coverageData.CoveragePercent, 2)
+
+    Write-Output "Current Code Coverage: $coveragePercent%"
+
+    if ($coveragePercent -lt 10) {
+        throw "Code coverage is below 10%. Actual coverage: $coveragePercent%"
+    }
 }
 
 

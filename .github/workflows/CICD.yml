@@ -1,0 +1,6 @@
+name: CI/CD Publish Powershel Module on Powershell Gallery
+
+on:
+  push:
+    branches:
+      - main
