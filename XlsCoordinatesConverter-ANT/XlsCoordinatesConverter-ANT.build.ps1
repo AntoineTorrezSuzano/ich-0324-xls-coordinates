@@ -68,23 +68,37 @@ task update-manifest {
 		Author = "CP-22ANT"
 		CompanyName = "Ceff Industrie Eleve"
 		Copyright = "(c) 2025 CP-22ANT Fictive Corporation. All rights reserved."
-		ModuleVersion = '0.0.2'
+		ModuleVersion = '0.0.3'
 	}
 	Update-ModuleManifest @Params
 
 }
+task Pre-Publish-Tests {
+	Invoke-Build analyse-script
+	Invoke-Build Tests-N-Coverage
+}
+
+task Publish {
+	$TargetApiKey = $env:NUGETAPIKEY
+	if ([string]::IsNullOrWhiteSpace($TargetApiKey)) {
+		$env = @{}
+		get-content "../.env" | ForEach-Object {
+			$name, $value = $_.split('=')
+			$env.Add($name, $value)
+		}
+		Write-Output ".env file was used"
+		#Publish-Module -Path '..\XlsCoordinatesConverter-ANT' -NuGetApiKey $env["NuGetApiKey"]
+	} else {
+		Write-Output "environment variable set by the workflow was used"
+		#Publish-Module -Path '..\XlsCoordinatesConverter-ANT' -NuGetApiKey $TargetApiKey
+	}
+
+}
+
 
 task Release {
-	#Under construction, need to complete the code coverage at task Tests-N-Coverage
-
-	# Invoke-Build analyse-script
-	# Invoke-Build Tests
-	# Invoke-Build update-manifest
-
-	# $env = @{}
-	# get-content "../.env" | ForEach-Object {
-	# 	$name, $value = $_.split('=')
-	# 	$env.Add($name, $value)
-	# }
-	# Publish-Module -Path '..\XlsCoordinatesConverter-ANT' -NuGetApiKey $env["NuGetApiKey"]
+	Invoke-Build analyse-script
+	Invoke-Build Tests-N-Coverage
+	Invoke-Build update-manifest
+	Invoke-Build Publish
 }
