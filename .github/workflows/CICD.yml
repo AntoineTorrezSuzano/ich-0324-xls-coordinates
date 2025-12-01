@@ -6,7 +6,15 @@ on:
       - main
 
 jobs:
+  tests-and-analyse:
+    runs-on: self-hosted
+    steps:
+      - uses: actions/checkout@v3
+      - name: Dire bonjour
+        run: echo "Bravo bien joué ça fonctionne"
+
   publish-job:
+    if: github.ref == 'refs/heads/main'
     runs-on: self-hosted
     environment: publish
     container:
@@ -33,16 +41,3 @@ jobs:
         shell: pwsh
         run: |
           ls
-
-on:
-  push:
-    branches:
-      - 'feature/**'
-
-jobs:
-  publish-job:
-    runs-on: self-hosted
-    steps:
-      - uses: actions/checkout@v3
-      - name: Dire bonjour
-        run: echo "Bravo bien joué ça fonctionne"
