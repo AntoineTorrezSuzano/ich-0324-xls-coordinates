@@ -7,7 +7,6 @@ function ConvertFrom-XlsCoordinate ([string]$Cell) {
         PS C:\> ConvertFrom-XlsCoordinate -Cell "B4"
     #>
 
-
     $CellUpper=$Cell.ToUpper(); # Format the parameters to upper characters
     $passedLetter=$false
 
@@ -52,8 +51,5 @@ function ConvertFrom-XlsCoordinate ([string]$Cell) {
         Column = $columnIndex
         Row = $row
     }
-
-    Export-ModuleMember -Function ConvertFrom-XlsCoordinate
-
 
 }

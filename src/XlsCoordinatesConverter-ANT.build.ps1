@@ -1,10 +1,5 @@
 Import-Module Pester
 
-#psscript analyser
-task formatfiles {
-
-}
-
 task analyse-script {
 	$filesToAnalyze = @(
 		'./XlsCoordinatesConverter-ANT.ps1',
@@ -30,9 +25,7 @@ task analyse-script {
 }
 
 
-
 task Tests-N-Coverage {
-	#tester code coverage 100%
 	$config = New-PesterConfiguration
 
 	$config.Run.Path = "."
@@ -59,23 +52,15 @@ task Tests-N-Coverage {
     }
 }
 
-
-
-# mise a jour manifest
 task update-manifest {
 	$Params = @{
 		Path = "./XlsCoordinatesConverter-ANT.psd1"
 		Author = "CP-22ANT"
 		CompanyName = "Ceff Industrie Eleve"
 		Copyright = "(c) 2025 CP-22ANT Fictive Corporation. All rights reserved."
-		ModuleVersion = '0.0.3'
+		ModuleVersion = '0.0.4'
 	}
 	Update-ModuleManifest @Params
-
-}
-task Pre-Publish-Tests {
-	Invoke-Build analyse-script
-	Invoke-Build Tests-N-Coverage
 }
 
 task Publish {
@@ -95,10 +80,24 @@ task Publish {
 
 }
 
+task Feature {
+	Invoke-Build analyse-script
+	Invoke-Build Tests-N-Coverage
+}
 
-task Release {
+task Build-Module {
 	Invoke-Build analyse-script
 	Invoke-Build Tests-N-Coverage
 	Invoke-Build update-manifest
+	Set-Location ..
+	Remove-Item ./out -Recurse -Force
+	New-Item -ItemType Directory ./out/XlsCoordinatesConverter-ANT
+	Copy-Item ./src/* ./out/XlsCoordinatesConverter-ANT -Recurse
+	Move-Item ./out/XlsCoordinatesConverter-ANT/XlsCoordinatesConverter-ANT.ps1 ./out/XlsCoordinatesConverter-ANT/XlsCoordinatesConverter-ANT.psm1 -Force
+	Add-Content -Path "./out/XlsCoordinatesConverter-ANT/XlsCoordinatesConverter-ANT.psm1" -Value "`nExport-ModuleMember -Function ConvertFrom-XlsCoordinate"
+}
+
+task Release {
+	Invoke-Build Build-Module
 	Invoke-Build Publish
 }
