@@ -9,10 +9,26 @@ on:
 jobs:
   tests-and-analyse:
     runs-on: self-hosted
+    environment: publish
+    container:
+      image: mcr.microsoft.com/powershell:7.5-debian-bookworm
+      env:
+        NUGET_API_KEY_A: ${{ secrets.NUGETAPIKEY }}
     steps:
-      - uses: actions/checkout@v3
-      - name: Dire bonjour
-        run: echo "Bravo bien joué ça fonctionne"
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Install Necessary Modules
+        shell: pwsh
+        run: |
+          Install-Module -Name Pester -RequiredVersion 5.3.1 -Force
+          Install-Module -Name InvokeBuild -RequiredVersion 5.9.11 -Force
+
+      - name: Tests
+        shell: pwsh
+        run: |
+          Set-Location ./src
+          Invoke-Build Pre-Publish-Tests
 
   publish-job:
     if: github.ref == 'refs/heads/main'
@@ -35,7 +51,7 @@ jobs:
       - name: Tests
         shell: pwsh
         run: |
-          Set-Location ./XlsCoordinatesConverter-ANT
+          Set-Location ./out/XlsCoordinatesConverter-ANT
           Invoke-Build Pre-Publish-Tests
 
       - name: Publish

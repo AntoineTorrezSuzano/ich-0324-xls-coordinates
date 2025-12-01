@@ -72,3 +72,8 @@ not secure enough, gotta see how is it at school
 ```pwsh
     $PSVersionTable.PSVersion
 ```
+
+### Self-hosting runners
+
+Il faut aller dans C:\actions-runner de la VM et lancer l'application run.cmd
+Ou pour en crée un, tu va dans les settings de ton repository : 1. Actions 2. Runners 3. New self-hosted runner 4. Suivre les instructions
