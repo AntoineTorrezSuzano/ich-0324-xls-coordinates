@@ -72,22 +72,20 @@ task Publish {
 			$env.Add($name, $value)
 		}
 		Write-Output ".env file was used"
-		#Publish-Module -Path '..\XlsCoordinatesConverter-ANT' -NuGetApiKey $env["NuGetApiKey"]
+		#Publish-Module -Path '..\out\XlsCoordinatesConverter-ANT' -NuGetApiKey $env["NuGetApiKey"]
 	} else {
 		Write-Output "environment variable set by the workflow was used"
-		#Publish-Module -Path '..\XlsCoordinatesConverter-ANT' -NuGetApiKey $TargetApiKey
+		#Publish-Module -Path '..\out\XlsCoordinatesConverter-ANT' -NuGetApiKey $TargetApiKey
 	}
 
 }
 
-task Feature {
+task Feature-Test {
 	Invoke-Build analyse-script
 	Invoke-Build Tests-N-Coverage
 }
 
 task Build-Module {
-	Invoke-Build analyse-script
-	Invoke-Build Tests-N-Coverage
 	Invoke-Build update-manifest
 	Set-Location ..
 	Remove-Item ./out -Recurse -Force

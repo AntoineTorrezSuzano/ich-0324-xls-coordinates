@@ -28,7 +28,7 @@ jobs:
         shell: pwsh
         run: |
           Set-Location ./src
-          Invoke-Build Pre-Publish-Tests
+          Invoke-Build Feature-Test
 
   publish-job:
     if: github.ref == 'refs/heads/main'
@@ -51,10 +51,9 @@ jobs:
       - name: Tests
         shell: pwsh
         run: |
-          Set-Location ./out/XlsCoordinatesConverter-ANT
-          Invoke-Build Pre-Publish-Tests
+          Invoke-Build Feature-Test
 
       - name: Publish
         shell: pwsh
         run: |
-          ls
+          Invoke-Build Release
