@@ -57,7 +57,7 @@ task update-manifest {
 		Author = "CP-22ANT"
 		CompanyName = "Ceff Industrie Eleve"
 		Copyright = "(c) 2025 CP-22ANT Fictive Corporation. All rights reserved."
-		ModuleVersion = '0.0.5'
+		ModuleVersion = '0.0.3'
 	}
 	Update-ModuleManifest @Params
 }
