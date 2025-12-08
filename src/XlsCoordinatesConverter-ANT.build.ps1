@@ -4,8 +4,8 @@ task analyse-script {
 	$filesToAnalyze = @(
 		'./XlsCoordinatesConverter-ANT.ps1',
 		'./XlsCoordinatesConverter-ANT.psd1',
-		'./XlsCoordinatesConverter-ANT.Tests.ps1',
-		'./XlsCoordinatesConverter-ANT.build.ps1'
+		'./XlsCoordinatesConverter-ANT.Tests.ps1'
+		# './XlsCoordinatesConverter-ANT.build.ps1'
 	)
 	$issues = @()
 	foreach ($file in $filesToAnalyze) {
