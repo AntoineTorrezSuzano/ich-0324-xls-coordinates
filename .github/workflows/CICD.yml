@@ -48,4 +48,5 @@ jobs:
       - name: Publish
         shell: pwsh
         run: |
+          Set-Location ./src
           Invoke-Build Release
