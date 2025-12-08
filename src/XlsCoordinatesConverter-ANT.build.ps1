@@ -66,15 +66,15 @@ task Publish {
 	$TargetApiKey = $env:NUGETAPIKEY
 	if ([string]::IsNullOrWhiteSpace($TargetApiKey)) {
 		$env = @{}
-		get-content "../.env" | ForEach-Object {
+		get-content "../../.env" | ForEach-Object {
 			$name, $value = $_.split('=')
 			$env.Add($name, $value)
 		}
 		Write-Output ".env file was used"
-		#Publish-Module -Path '..\out\XlsCoordinatesConverter-ANT' -NuGetApiKey $env["NuGetApiKey"]
+		Publish-Module -Path '..\out\XlsCoordinatesConverter-ANT' -NuGetApiKey $env["NuGetApiKey"]
 	} else {
 		Write-Output "environment variable set by the workflow was used"
-		#Publish-Module -Path '..\out\XlsCoordinatesConverter-ANT' -NuGetApiKey $TargetApiKey
+		Publish-Module -Path '..\out\XlsCoordinatesConverter-ANT' -NuGetApiKey $TargetApiKey
 	}
 
 }
@@ -91,8 +91,9 @@ task Build-Module {
 	Copy-Item ./src/* ./out/XlsCoordinatesConverter-ANT -Recurse
 	Move-Item ./out/XlsCoordinatesConverter-ANT/XlsCoordinatesConverter-ANT.ps1 ./out/XlsCoordinatesConverter-ANT/XlsCoordinatesConverter-ANT.psm1 -Force
 	Add-Content -Path "./out/XlsCoordinatesConverter-ANT/XlsCoordinatesConverter-ANT.psm1" -Value "`nExport-ModuleMember -Function ConvertFrom-XlsCoordinate"
-	ls
+	Set-Location ./out/XlsCoordinatesConverter-ANT
 	Invoke-Build update-manifest
+
 }
 
 task Release {
