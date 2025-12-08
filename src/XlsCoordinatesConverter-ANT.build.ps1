@@ -86,7 +86,7 @@ task Feature-Test {
 
 task Build-Module {
 	Set-Location ..
-	Remove-Item ./out -Recurse -Force
+	Remove-Item ./out -Recurse -Force -ErrorAction Ignore
 	New-Item -ItemType Directory ./out/XlsCoordinatesConverter-ANT
 	Copy-Item ./src/* ./out/XlsCoordinatesConverter-ANT -Recurse
 	Move-Item ./out/XlsCoordinatesConverter-ANT/XlsCoordinatesConverter-ANT.ps1 ./out/XlsCoordinatesConverter-ANT/XlsCoordinatesConverter-ANT.psm1 -Force
