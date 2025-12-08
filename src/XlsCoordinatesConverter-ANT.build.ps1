@@ -91,6 +91,7 @@ task Build-Module {
 	Copy-Item ./src/* ./out/XlsCoordinatesConverter-ANT -Recurse
 	Move-Item ./out/XlsCoordinatesConverter-ANT/XlsCoordinatesConverter-ANT.ps1 ./out/XlsCoordinatesConverter-ANT/XlsCoordinatesConverter-ANT.psm1 -Force
 	Add-Content -Path "./out/XlsCoordinatesConverter-ANT/XlsCoordinatesConverter-ANT.psm1" -Value "`nExport-ModuleMember -Function ConvertFrom-XlsCoordinate"
+	ls
 	Invoke-Build update-manifest
 }
 
