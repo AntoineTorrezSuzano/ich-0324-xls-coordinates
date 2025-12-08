@@ -85,13 +85,13 @@ task Feature-Test {
 }
 
 task Build-Module {
-	Invoke-Build update-manifest
 	Set-Location ..
 	Remove-Item ./out -Recurse -Force
 	New-Item -ItemType Directory ./out/XlsCoordinatesConverter-ANT
 	Copy-Item ./src/* ./out/XlsCoordinatesConverter-ANT -Recurse
 	Move-Item ./out/XlsCoordinatesConverter-ANT/XlsCoordinatesConverter-ANT.ps1 ./out/XlsCoordinatesConverter-ANT/XlsCoordinatesConverter-ANT.psm1 -Force
 	Add-Content -Path "./out/XlsCoordinatesConverter-ANT/XlsCoordinatesConverter-ANT.psm1" -Value "`nExport-ModuleMember -Function ConvertFrom-XlsCoordinate"
+	Invoke-Build update-manifest
 }
 
 task Release {
