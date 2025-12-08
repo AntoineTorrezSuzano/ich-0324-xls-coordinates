@@ -3,7 +3,6 @@ Import-Module Pester
 task analyse-script {
 	$filesToAnalyze = @(
 		'./XlsCoordinatesConverter-ANT.ps1',
-		'./XlsCoordinatesConverter-ANT.psm1',
 		'./XlsCoordinatesConverter-ANT.psd1',
 		'./XlsCoordinatesConverter-ANT.Tests.ps1',
 		'./XlsCoordinatesConverter-ANT.build.ps1'
